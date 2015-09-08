@@ -1,6 +1,5 @@
 # Introduction
-This is a variant of interval tree data structure (in polish: drzewo 
-przedziałowe). This name may not be correct (see last paragraph).
+This is a variant of interval tree data structure. This name may not be technically correct - please see last paragraph for explanation.
 
 This tree allows following operations (each runs in O(log N) complexity):
 - insert a segment with some weight
@@ -11,19 +10,20 @@ This tree allows following operations (each runs in O(log N) complexity):
 
 Short example below. Please refer to tests/example.rs for bigger example.
 
-```
+```rust
 use interval_tree::pointmax::{PointMaxTree};
 
-...
 
-let mut t = PointMaxTree::new(1, 10);
-t.insert(1, 5, 1);
-t.insert(5, 6, 21);
-assert_eq!(t.query(1), Some(1));
-assert_eq!(t.query(2), Some(1));
-assert_eq!(t.query(5), Some(21));
-assert_eq!(t.query(6), Some(20));
-assert_eq!(t.query(9), Some(0));
+fn main() {
+  let mut t = PointMaxTree::new(1, 10);
+  t.insert(1, 5, 1);
+  t.insert(5, 6, 21);
+  assert_eq!(t.query(1), Some(1));
+  assert_eq!(t.query(2), Some(1));
+  assert_eq!(t.query(5), Some(21));
+  assert_eq!(t.query(6), Some(20));
+  assert_eq!(t.query(9), Some(0));
+}
 ```
 
 # Naming
