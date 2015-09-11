@@ -1,11 +1,10 @@
 extern crate interval_tree;
 
-use interval_tree::pointmax::{PointMaxTree};
+use interval_tree::pointsum::{PointSumTree};
 
-#[test]
-fn example() {
+fn main() {
     // create a new tree, which will represent segment (2, 11) 
-    let mut t = PointMaxTree::new(2, 11);
+    let mut t = PointSumTree::new(2, 11);
     // the segment looks now like this:
     // positions: | 2| 3| 4| 5| 6| 7| 8| 9|10|11|  
     //   weights: | 0| 0| 0| 0| 0| 0| 0| 0| 0| 0|

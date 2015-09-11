@@ -5,24 +5,25 @@ This tree allows following operations (each runs in O(log N) complexity):
 - insert a segment with some weight
 - count sum of weights of segments in a given point
 
+Therefore the name pointsum tree - it allows you to find sum of intervals in a point.
 
 # Usage
 
-Short example below. Please refer to tests/example.rs for bigger example.
+Short example below. Please refer to examples/pointsum.rs for bigger example.
 
 ```rust
-use interval_tree::pointmax::{PointMaxTree};
-
+use interval_tree::pointsum::{PointSumTree};
 
 fn main() {
-  let mut t = PointMaxTree::new(1, 10);
-  t.insert(1, 5, 1);
-  t.insert(5, 6, 21);
-  assert_eq!(t.query(1), Some(1));
-  assert_eq!(t.query(2), Some(1));
-  assert_eq!(t.query(5), Some(21));
-  assert_eq!(t.query(6), Some(20));
-  assert_eq!(t.query(9), Some(0));
+    let mut t = PointSumTree::new(1, 10);
+    assert_eq!(t.bounds(), (1, 10));
+    t.insert(1, 5, 1);
+    t.insert(5, 6, 21);
+    assert_eq!(t.query(1), Some(1));
+    assert_eq!(t.query(2), Some(1));
+    assert_eq!(t.query(5), Some(21));
+    assert_eq!(t.query(6), Some(20));
+    assert_eq!(t.query(9), Some(0));
 }
 ```
 

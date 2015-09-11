@@ -1,1 +1,1 @@
-pub mod pointmax;
+pub mod pointsum;
