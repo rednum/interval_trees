@@ -91,7 +91,7 @@ fn small_queries_3() {
 }
 
 #[test]
-fn test_big() {
+fn large_queries() {
     let mut t = SegmentPointTree::new(0, 1_000_000, 0, Box::new(|x: &i64, y: &i64| x + y));
     assert_eq!(t.bounds(), (0, 1_000_000));
     assert_eq!(t.query(-1), None);
