@@ -3,9 +3,6 @@ extern crate num;
 use self::num::traits::{Num};
 use self::num::traits::{One};
 use common::{mid};
-use std::fmt::{Debug};
-use std::io::stdout;
-use std::io::Write;
 
 pub struct PointSegmentTree<N, P>{
     root: Node<N, P>,
@@ -26,7 +23,7 @@ struct Node<N, P> {
 
 pub type F<P> = Fn(&P, &P) -> P;
 
-impl<N: Debug+Num+Clone+Ord, P: Debug+Clone> PointSegmentTree<N, P> {
+impl<N: Num+Clone+Ord, P: Clone> PointSegmentTree<N, P> {
     pub fn new(lower_bound: N, upper_bound: N, default_value: P,
                combine: Box<F<P>>) -> Self 
     {
@@ -68,8 +65,7 @@ impl<N: Debug+Num+Clone+Ord, P: Debug+Clone> PointSegmentTree<N, P> {
 
 }
 
-
-impl<N: Num+Clone+Ord+Debug, P: Debug+Clone> Node<N, P> {
+impl<N: Num+Clone+Ord, P: Clone> Node<N, P> {
     fn new(start: N, end: N, default_value: &P) -> Self { 
         Node {
             start: start,
@@ -86,7 +82,6 @@ impl<N: Num+Clone+Ord+Debug, P: Debug+Clone> Node<N, P> {
 
     fn query(&self, start_q: N, end_q: N, combine: &F<P>, acc: P) -> P {
         if self.start == start_q && self.end == end_q {
-            stdout().flush();
             return combine(&self.value, &acc);
         }
         let mid = mid(self.start.clone(), self.end.clone());
