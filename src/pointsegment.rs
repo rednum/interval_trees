@@ -113,21 +113,25 @@ impl<N: Num+Clone+Ord, P: Clone> Node<N, P> {
     fn insert(&mut self, point_n: N, point_data: P,
               default: &P, combine: &F<P>) {
         let mid = mid(self.start.clone(), self.end.clone());
-        self.value = combine(&self.value, &point_data);
         if self.start == self.end {
-            // leaf
+            self.value = point_data;
             return;
-        }
-        if point_n <= mid {
+        } else if point_n <= mid {
             if self.left.is_none() {
                 self.left = Node::new_son(self.start.clone(), mid, default);
             }
             self.left.as_mut().map(|n| n.insert(point_n, point_data, default, combine));
-        } else {
+        } else { // point_n > mid
             if self.right.is_none() {
                 self.right = Node::new_son(mid + One::one(), self.end.clone(), default);
             }
             self.right.as_mut().map(|n| n.insert(point_n, point_data, default, combine));
         }
+        self.value = match (self.left.as_ref(), self.right.as_ref()) {
+            (Some(ref l), Some(ref r)) => combine(&l.value, &r.value),
+            (Some(ref l), _) => l.value.clone(),
+            (_, Some(ref r)) => r.value.clone(),
+            _ => unreachable!()
+        };
     }
 }
