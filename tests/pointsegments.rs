@@ -49,20 +49,20 @@ fn singleton_tree() {
     t.insert(5, 1);
     assert_eq!(t.query(5, 5), Some(1));
     t.insert(5, 100);
-    assert_eq!(t.query(5, 5), Some(101));
+    assert_eq!(t.query(5, 5), Some(100));
 }
 
 #[test]
 fn test_bounds() {
     let t = PointSegmentTree::new(3, 15, 0,
-                                      Box::new(|x: &i64, y: &i64| max(x.clone(), y.clone())));
+                                      Box::new(|x: &i64, y: &i64| max(*x, *y)));
     assert_eq!(t.bounds(), (3, 15));
 }
 
 #[test]
 fn small_queries() {
     let mut t = PointSegmentTree::new(3, 15, 0,
-                                      Box::new(|x: &i64, y: &i64| max(x.clone(), y.clone())));
+                                      Box::new(|x: &i64, y: &i64| max(*x, *y)));
     t.insert(3, 1);
     t.insert(4, 2);
     t.insert(5, 5);
