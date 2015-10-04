@@ -2,6 +2,9 @@
 name = "interval_tree"
 version = "0.2.0"
 authors = ["marcinf"]
+repository = "http://github.com/rednum/interval_trees"
+license = "BSD-2-Clause"
+description = "A variant of interval tree data structure."
 
 [dependencies]
 num = "0.1.27"
